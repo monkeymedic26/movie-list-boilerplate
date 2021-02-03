@@ -1,15 +1,18 @@
 import React from 'react';
 import MovieListEntry from './MovieListEntry'
-
-const MovieList = (props) => (
+var MovieList = ({movies}) => (
   <div className='movie-list'>
-    {movies.map((movie) =>
+    {movies.map((movie) => (
       <MovieListEntry
         movie={movie}
         key={movie.title}
       />
-    )}
+    ))}
   </div>
 );
 
-export default MovieList
+// MovieList.propTypes = {
+//   movies: PropTypes.array.isRequired
+// }
+
+export default MovieList;
