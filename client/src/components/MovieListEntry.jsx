@@ -1,11 +1,12 @@
 import React from 'react';
-import movieEntriesExample from './movieEntriesExample.jsx'
 
-const MovieListEntry = ({movies}) => (
+
+const MovieListEntry = ({movie}) => (
   <div className="movie-list item">
     <div className="movie-list title">{movie.tiitle}</div>
   </div>
 );
+
 
 // MovieListEntry.propTypes = {
 //   movie: PropTypes.object.isRequired
