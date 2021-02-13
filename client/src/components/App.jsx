@@ -1,6 +1,7 @@
 import React from 'react';
-import MovieList from './MovieList.jsx'
-import Search from './Search.jsx'
+import MovieList from './MovieList.jsx';
+import Search from './Search.jsx';
+import AddMovie from './AddMovie.jsx';
 
 class App extends React.Component {
 
@@ -8,32 +9,45 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movieEntries: [
+      movies: [
         {title: 'Mean Girls'},
         {title: 'Hackers'},
         {title: 'The Grey'},
         {title: 'Sunshine'},
         {title: 'Ex Machina'}
-      ]
+      ],
+      searchField: ''
     };
     this.addMovie = this.addMovie.bind(this);
+    // this.editSearchTerm = this.editSearchTerm.bind(this);
+    // this.dynamicSearch = this.dynamicSearch.bind(this);
   }
 
-    addMovie (movie) {
-      let tempArray = this.state.movieEntries;
-      tempArray.push(movie);
-      this.setState({movieEntries: tempArray});
+    addMovie(movie) {
+      const movies = [...this.state.movies]
+      movies.push(movie);
+      this.setState({
+        movies
+      });
     }
 
   render() {
+    const {movies, searchField} = this.state;
+    const filteredMovies = movies.filter(title => (
+      title.title.includes(searchField)
+    ))
     return (
     <div>
       <h2>Movie List!</h2>
       <div>
-        <Search addMovieItem={this.addMovie}/>
+        <AddMovie addMovie={this.addMovie}/>
+        <Search
+        placeholder='Search Here'
+        handleChange={(event) => this.setState({searchField: event.target.value})}
+        />
+        <MovieList movies={filteredMovies}/>
       </div>
       <div>
-        <MovieList movieEntries={this.state.movieEntries}/>
       </div>
     </div>
     );
