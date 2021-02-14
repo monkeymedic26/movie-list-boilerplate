@@ -5,7 +5,10 @@ const MovieList = (props) => (
   <div className='movie-list names'>
     <ul>
       {props.movies.map((movie, idx) =>(
-        <li key={movie.title + idx}>{movie.title}</li>
+        <li key={movie.title + idx}>{movie.title}
+        <button onClick={props.buttonTextChange}>{props.buttonText}</button>
+        </li>
+
       ))}
     </ul>
   </div>
