@@ -10,17 +10,17 @@ class App extends React.Component {
 
     this.state = {
       movies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'}
+        // {title: 'Mean Girls'},
+        // {title: 'Hackers'},
+        // {title: 'The Grey'},
+        // {title: 'Sunshine'},
+        // {title: 'Ex Machina'}
       ],
-      searchField: ''
+      searchField: '',
+      buttonText: 'Unwatched'
     };
     this.addMovie = this.addMovie.bind(this);
-    // this.editSearchTerm = this.editSearchTerm.bind(this);
-    // this.dynamicSearch = this.dynamicSearch.bind(this);
+    this.buttonTextChange = this.buttonTextChange.bind(this);
   }
 
     addMovie(movie) {
@@ -31,10 +31,18 @@ class App extends React.Component {
       });
     }
 
+    buttonTextChange(event) {
+      console.log('button pressed')
+      let buttonText = this.state.buttonText == 'Unwatched' ? 'Watched' : 'Unwatched'
+      this.setState({
+        buttonText: buttonText
+      })
+    }
+
   render() {
     const {movies, searchField} = this.state;
     const filteredMovies = movies.filter(title => (
-      title.title.includes(searchField)
+      title.title.toLowerCase().includes(searchField.toLowerCase())
     ))
     return (
     <div>
@@ -45,7 +53,7 @@ class App extends React.Component {
         placeholder='Search Here'
         handleChange={(event) => this.setState({searchField: event.target.value})}
         />
-        <MovieList movies={filteredMovies}/>
+        <MovieList movies={filteredMovies} buttonTextChange={this.buttonTextChange} buttonText={this.state.buttonText}/>
       </div>
       <div>
       </div>
