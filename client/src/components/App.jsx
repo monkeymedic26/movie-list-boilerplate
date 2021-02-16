@@ -2,6 +2,7 @@ import React from 'react';
 import MovieList from './MovieList.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx';
+import Watch from './WatchButton'
 
 class App extends React.Component {
 
@@ -10,14 +11,15 @@ class App extends React.Component {
 
     this.state = {
       movies: [
-        // {title: 'Mean Girls'},
-        // {title: 'Hackers'},
-        // {title: 'The Grey'},
-        // {title: 'Sunshine'},
-        // {title: 'Ex Machina'}
+        {title: 'Mean Girls'},
+        {title: 'Hackers'},
+        {title: 'The Grey'},
+        {title: 'Sunshine'},
+        {title: 'Ex Machina'}
       ],
       searchField: '',
-      buttonText: 'Unwatched'
+      watched: [],
+      toWatch: []
     };
     this.addMovie = this.addMovie.bind(this);
     this.buttonTextChange = this.buttonTextChange.bind(this);
@@ -33,7 +35,7 @@ class App extends React.Component {
 
     buttonTextChange(event) {
       console.log('button pressed')
-      let buttonText = this.state.buttonText == 'Unwatched' ? 'Watched' : 'Unwatched'
+      let buttonText = this.state.status == 'Unwatched' ? 'Watched' : 'Unwatched'
       this.setState({
         buttonText: buttonText
       })
@@ -42,8 +44,7 @@ class App extends React.Component {
   render() {
     const {movies, searchField} = this.state;
     const filteredMovies = movies.filter(title => (
-      title.title.toLowerCase().includes(searchField.toLowerCase())
-    ))
+      title.title.toLowerCase().includes(searchField.toLowerCase())));
     return (
     <div>
       <h2>Movie List!</h2>
@@ -53,7 +54,10 @@ class App extends React.Component {
         placeholder='Search Here'
         handleChange={(event) => this.setState({searchField: event.target.value})}
         />
-        <MovieList movies={filteredMovies} buttonTextChange={this.buttonTextChange} buttonText={this.state.buttonText}/>
+        <Watch />
+        {filteredMovies.map((movie, idx) => (
+          <MovieList key={idx} movieName={movie.title} />
+        ))}
       </div>
       <div>
       </div>

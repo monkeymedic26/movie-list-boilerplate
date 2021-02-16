@@ -1,18 +1,35 @@
 import React from 'react';
 
 
-const MovieList = (props) => (
-  <div className='movie-list names'>
-    <ul>
-      {props.movies.map((movie, idx) =>(
-        <li key={movie.title + idx}>{movie.title}
-        <button onClick={props.buttonTextChange}>{props.buttonText}</button>
-        </li>
+class MovieList extends React.Component {
 
-      ))}
-    </ul>
-  </div>
-);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      status: 'Unwatched'
+    }
+    this.buttonTextChange = this.buttonTextChange.bind(this);
+  };
+
+  buttonTextChange(event) {
+    console.log('button pressed')
+    let buttonText = this.state.status == 'Unwatched' ? 'Watched' : 'Unwatched'
+    this.setState({
+      status: buttonText
+    })
+  }
+
+  render() {
+    return (
+      <ul>
+        <li>{this.props.movieName}</li>
+        <button onClick={this.buttonTextChange}>{this.state.status}</button>
+      </ul>
+    )
+
+  }
+}
 
 
 // MovieList.propTypes = {
