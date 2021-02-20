@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieList from './MovieList.jsx'
+import Search from './Search.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Search />
         {this.state.movies.map((movie, idx) => (
         <MovieList key={idx} movieName={movie.title} />
         ))}
