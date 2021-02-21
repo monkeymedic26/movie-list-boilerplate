@@ -5,7 +5,8 @@ class AddMovie extends React.Component {
     super(props);
 
     this.state = {
-      title: ''
+      title: '',
+      status: 'to watch'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

@@ -7,7 +7,7 @@ const Search = (props) => {
       type='search'
       className='search'
       onChange={props.handleChange}></input>
-      <button>Search</button>
+      <button onClick={props.handleClick}>Search</button>
     </div>
   )
 }
